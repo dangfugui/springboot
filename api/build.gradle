@@ -1,0 +1,9 @@
+dependencies{
+    compile project(":common")
+    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+}
+
+task jarWithoutResources(type: Jar) {
+    baseName project.name
+    from("$buildDir/classes/main")
+}

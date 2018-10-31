@@ -1,0 +1,32 @@
+group 'dang.note.spring'
+version '1.0-SNAPSHOT'
+// 所有模块都使用java插件  jdk版本为1.8
+allprojects {
+    apply plugin: "java"
+    apply plugin: 'idea'
+    sourceCompatibility = 1.8
+    ext {
+        springBootVersion = '2.0.6.RELEASE'
+    }
+}
+// 所有子模块配置
+subprojects {
+    repositories {
+        flatDir {
+            dirs 'libs' // 先看下build.gradle文件所在目录下的 libs目录中有没有
+        }
+        mavenLocal()    //  maven 本地仓库
+        mavenCentral()  //  maven 中央仓库
+    }
+    // 版本依赖
+    dependencies {
+        // lombok
+        annotationProcessor('org.projectlombok:lombok:1.18.2')
+        compileOnly('org.projectlombok:lombok:1.18.2')
+        testAnnotationProcessor('org.projectlombok:lombok:1.18.2')
+        testCompileOnly ('org.projectlombok:lombok:1.18.2')
+        // springboot
+        compile("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+    }
+}
